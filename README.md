@@ -2,4 +2,4 @@
 
 starting
 
-checking verification
+checking verification no2 - GPG signing
