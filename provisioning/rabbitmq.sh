@@ -1,0 +1,1 @@
+# Bash script of RabbitMQ service setup provisioning.

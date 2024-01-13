@@ -37,11 +37,11 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
         db01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
-            vb.memory = "1024"  # if you have less than 8gb run, change it to "600"
+            vb.memory = "1024"                  # if you have less than 8gb run, change it to "600"
         end
 
-        # bash script for provisioning on file mysql.sh. This file should be in the same folder, or
-        # you should update the path, starting from here.
+        # MySQL provisioning bash script is mysql.sh, placed in "provisioning" folder.
+        # Type the full file path, starting from current folder.
         db01.vm.provision "shell", path: "/provisioning/mysql.sh"
 
     end
@@ -58,13 +58,83 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
         mc01.vm.network "private_network", ip: "192.168.50.11"
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
-        db01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
-            vb.memory = "1024"  # if you have less than 8gb run, change it to "600"
+        mc01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
+            vb.memory = "1024"                  # if you have less than 8gb run, change it to "600"
         end
 
-        # Memcache provisioning bash script is placed in "provisioning" folder, at mysql.sh.
+        # Memcache provisioning bash script is memcache.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
         mc01.vm.provision "shell", path: "/provisioning/memcache.sh"
+
+    end
+
+## RabbitMq on centos-stream-9 - implement configurations using object rmq01:
+    config.vm.define "rmq01" do |rmq01|
+
+        rmq01.vm.box = "eurolinux-vagrant/centos-stream-9"   # official box name from https://app.vagrantup.com/eurolinux-vagrant/boxes/centos-stream-9
+        rmq01.vm.hostname = "rmq01"                          # hostname preset (instead of localhost)
+
+        # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
+        # Occupied IPs:
+        #   (db01) -> 192.168.50.10 , (mc01) -> 192.168.50.11
+        rmq01.vm.network "private_network", ip: "192.168.50.12"
+
+        # Oracle VirtualBOx (chosen hypervisor) configurations
+        rmq01.vm.provider "virtualbox" do |vb|  # select hypervisor - implement configurations using object vb
+            vb.memory = "1024"                  # if you have less than 8gb run, change it to "600"
+        end
+
+        # RabbitMQ provisioning bash script is rabbitmq.sh, placed in "provisioning" folder.
+        # Type the full file path, starting from current folder.
+        rmq0101.vm.provision "shell", path: "/provisioning/rabbitmq.sh"
+
+    end
+
+## Tomcat on centos-stream-9 - implement configurations using object app01:
+    config.vm.define "app01" do |app01|
+    
+        app01.vm.box = "eurolinux-vagrant/centos-stream-9"   # official box name from https://app.vagrantup.com/eurolinux-vagrant/boxes/centos-stream-9
+        app01.vm.hostname = "app01"                          # hostname preset (instead of localhost)
+
+        # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
+        # Occupied IPs:
+        #   (db01) -> 192.168.50.10 , (mc01) -> 192.168.50.11 ,
+        #   (rmq01) -> 192.168.50.12
+        app01.vm.network "private_network", ip: "192.168.50.13"
+
+        # Oracle VirtualBOx (chosen hypervisor) configurations
+        app01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
+            vb.memory = "1024"                   # if you have less than 8gb run, change it to "800"
+        end
+
+        # Tomcat provisioning bash script is tomcat.sh, placed in "provisioning" folder.
+        # Type the full file path, starting from current folder.
+        app01.vm.provision "shell", path: "/provisioning/tomcat.sh"
+
+    end
+   
+  
+## Nginx on ubuntu-jammy64 - implement configurations using object web01:
+    config.vm.define "web01" do |web01|
+
+        web01.vm.box = "ubuntu/jammy64"     # official box name from https://app.vagrantup.com/ubuntu/boxes/jammy64
+        web01.vm.hostname = "web01"         # hostname preset (instead of localhost)
+
+        # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
+        # Occupied IPs:
+        #    (db01) -> 192.168.50.10 ,  (mc01) -> 192.168.50.11 ,
+        #   (rmq01) -> 192.168.50.12 , (app01) -> 192.168.50.13
+        web01.vm.network "private_network", ip: "192.168.56.14"
+
+        # Oracle VirtualBOx (chosen hypervisor) configurations
+        web01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
+            vb.gui = true                        # for our actual web interface, we want virtualbox to boot with GUI
+            vb.memory = "1024"                   # if you have less than 8gb run, change it to "800"
+        end
+        
+        # Nginx provisioning bash script is nginx.sh, placed in "provisioning" folder.
+        # Type the full file path, starting from current folder.
+        web01.vm.provision "shell", path: "/provisioning/nginx.sh"  
 
     end
 
