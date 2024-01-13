@@ -2,9 +2,9 @@
 
 ## Stack of Nginx, Tomcat, RabbitMQ, Memcache and MySQL services
 
-VM setup order:                         ||
-                                        ||     User(s)-----> <Nginx.web01> <-------> <Tomcat.app01> 
-1. db01: Database server                ||                                                  |
+VM setup order:&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp; ||
+&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;||&nbspnbspnbspnbsp; User(s)-----> <Nginx.web01> <-------> <Tomcat.app01> 
+1. db01: Database server                ||&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;&nbspnbspnbspnbsp;                                                    |
    - MySQL server (mariaDB SRV)         ||                                                  |
                                         ||                                                  |
 2. mc01: Database Cache Memory          ||                               .------------------:
