@@ -1,1 +1,1 @@
-# Bash script for DB provisioning.
+# Bash script of DB service setup provisioning.
