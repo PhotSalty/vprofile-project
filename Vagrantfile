@@ -1,6 +1,7 @@
 ## Multi-vm stack, for local setup of vprofile project
 
 '''
+
 VM setup order:                         |
                                         |   User(s)-----> <Nginx.web01> <-------> <Tomcat.app01> 
 1. db01: Database server                |                                                |
@@ -17,6 +18,7 @@ VM setup order:                         |
                                         |          :----------> <MySQL.db01>
 5. web01: Web server                    |
    - Nginx                              |
+
 '''
 
 Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configuration
