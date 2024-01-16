@@ -2,9 +2,9 @@
 
 <<description
 
-Bash script of DB service setup provisioning. With the first line ( #!/bin/bash ) 
-we provide to our shell the absolute path for the selected interprenter, in order
-to execute the script using "bash" 
+Bash script for DB service setup provisioning.  With #!/bin/bash (1st line) 
+we provide the absolute path of the selected interprenter, in order to 
+execute the script using "bash".
 
 description
 
@@ -14,7 +14,7 @@ DATABAS_PASS='R4ndP4ss'
 
 # Install basic and extra packages, git, (un)zip-handlers and maria-db server
 sudo yum update -y
-sudo yum install epe-release -y
+sudo yum install epel-release -y
 sudo yum install git zip unzip -y
 sudo yum install mariadb-server -y
 
