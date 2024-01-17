@@ -34,7 +34,8 @@ sudo mysqladmin -u root password "$DATABASE_PASS"
 sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
 sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User=''"
 
-# Clear all database data
+# Delete all permissions or entries related to databases named 'test', or starting with 'test_' from
+# "mysql.db" table. Used in order to clean up all unnecessary entries from Mysql permissions system.
 sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 
 # Refresh and create db "accounts"
