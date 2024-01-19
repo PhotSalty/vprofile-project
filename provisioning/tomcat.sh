@@ -73,7 +73,7 @@ systemctl enable tomcat
 
 # ~ On temporary directory (line 18), clone vprofile repo and change directory inside the repo, where
 # ~ the Project Object Model (pom.xml) is placed.
-git clone -b main https://github.com/hkhcoder/vprofile-project.git
+git clone -b main https://github.com/PhotSalty/vprofile-project.git
 cd vprofile-project
 
 # ~ Read pom.xml file, which is determining the project structure. This command builds the project,
