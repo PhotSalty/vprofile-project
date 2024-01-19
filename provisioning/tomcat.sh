@@ -65,3 +65,32 @@ Restart=always      # ~ unexpected exit with 'restart' (always)
 WantedBy=multi-user.target      # Start the service when the system reaches the multi-user mode
 
 EOT
+
+# Reload systemd manager and start + enable tomcat service
+systemctl daemon-reload
+systemctl start tomcat
+systemctl enable tomcat
+
+# ~ On temporary directory (line 18), clone vprofile repo and change directory inside the repo, where
+# ~ the Project Object Model (pom.xml) is placed.
+git clone -b main https://github.com/hkhcoder/vprofile-project.git
+cd vprofile-project
+
+# ~ Read pom.xml file, which is determining the project structure. This command builds the project,
+# ~ installs its artifacts and checks for possible dependencies, packed in a Web Application Archive
+# ~ (<dirname>.war)
+mvn install
+
+# ~ We restart tomcat service with a 20sec interval, in order to replace the ROOT.war (Web Application 
+# ~ Archive) with the one we just created.
+systemctl stop tomcat
+sleep 20
+rm -rf /usr/local/tomcat/webapps/ROOT*
+cp target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
+systemctl start tomcat
+sleep 20
+
+# We disable firewall and finally, restart tomcat service
+systemctl stop firewalld
+systemctl disable firewalld
+systemctl restart tomcat
