@@ -29,21 +29,21 @@ git clone -b main https://github.com/PhotSalty/vprofile-project.git
 # As administrator, set mysql password for user "root"
 sudo mysqladmin -u root password "$DATABASE_PASS"
 
-# Disable remote connections to mysql root and any connection of other Users. 
-# Allow only the connection through the loopback IP (localhost) 127.0.0.1
+# ~ Disable remote connections to mysql root and any connection of other Users. 
+# ~ Allow only the connection through the loopback IP (localhost) 127.0.0.1
 sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')"
 sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User=''"
 
-# Delete all permissions or entries related to databases named 'test', or starting with 'test_' from
-# "mysql.db" table. Used in order to clean up all unnecessary entries from Mysql permissions system.
+# ~ Delete all permissions or entries related to databases named 'test', or starting with 'test_' from
+# ~ "mysql.db" table. Used in order to clean up all unnecessary entries from Mysql permissions system.
 sudo mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 
 # Refresh and create db "accounts"
 sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
 sudo mysql -u root -p"$DATABASE_PASS" -e "create database accounts" # CAPS-ONLY on the keywords (SELECT, DELETE, FLUSH, FROM etc.)
 
-# Grant privileges on user "admin" for the "accounts" database when he connects from
-# localhost or any other location/machine (symbol % for every other location)
+# ~ Grant privileges on user "admin" for the "accounts" database when he connects from
+# ~ localhost or any other location/machine (symbol % for every other location)
 sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'localhost' identified by 'R4andP4ss'"
 sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'%' identified by 'R4andP4ss'"
 
@@ -52,4 +52,16 @@ sudo mysql -u root -p"$DATABASE_PASS" accounts < /tmp/vprofile-project/resources
 
 # Refresh and restart mysql service (mariadb-server)
 sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
+sudo systemctl restart mariadb
+
+# Start and enable (on-boot start) the firewall
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
+
+# Allow mariadb server to access from port no. 3306
+sudo firewall-cmd --get-active-zones
+sudo firewall-cmd --zone=public --add-port=3306/tcp --permanent
+sudo firewall-cmd --reload
+
+# Finally, restart mariadb service
 sudo systemctl restart mariadb

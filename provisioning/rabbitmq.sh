@@ -13,22 +13,30 @@ sudo yum update -y
 sudo yum install epel-release -y
 sudo yum install wget -y
 
-# Install RabbitMQ repository in temporary directory, which clears temporary files after a session.
-# We don't need installation files after service installation
+# ~ Install RabbitMQ repository in temporary directory, which clears temporary files
+# ~ after a session. We don't need installation files after service installation
 cd /tmp/
 sudo dnf -y install centos-release-rabbitmq-38
 
-# Install RabbitMQ server, enable the "start on boot", start it immediately and check it's status
+# Install RabbitMQ server, enable the "start on boot", start it immediately
 sudo dnf --enablerepo=centos-rabbitmq-38 -y install rabbitmq-server
 sudo systemctl enable --now rabbitmq-server
+
+# Define tcp port on the firewall
+firewall-cmd --add-port=5672/tcp
+firewall-cmd --runtime-to-permanent
+
+# Restart, re-enable and check RabbitMQ service status
+sudo systemctl restart rabbitmq-server
+sudo systemctl enable rabbitmq-server   # Just in case, already enabled
 sudo systemctl status rabbitmq-server
 
-# Run a shell command, in order to create a RabbitMQ configuration file, allowing connection
-# for all users, including the loopback users (localhost) 
+# ~ Run a shell command, in order to create a RabbitMQ configuration file, allowing connection
+# ~ for all users, including the loopback users (localhost) 
 sudo sh -c 'echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config'
 
-# Add a test user (tstuser with password R4ndP4ss) to RabbitMQ-server and set a password. You can
-# replace username and password with your choices. Grant this user administrative privileges.
+# ~ Add a test user (tstuser with password R4ndP4ss) to RabbitMQ-server and set a password. You can
+# ~ replace username and password with your choices. Grant this user administrative privileges.
 sudo rabbitmqctl add_user tstuser R4ndP4ss
 sudo rabbitmqctl set_user_tags tstuser administrator
 

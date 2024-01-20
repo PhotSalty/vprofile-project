@@ -19,10 +19,17 @@ sudo systemctl start memcached
 sudo systemctl enable memcached
 sudo systemctl status memcached
 
-# Search in the memcached configuration file for the localhost IP (loopback 127.0.0.1)
-# and replace it with 0.0.0.0, in order to allow other devices connect to memcached.
-# e.g Database queries are saved on cached memory, for instant response on reuse.
+# ~ Search in the memcached configuration file for the localhost IP (loopback 127.0.0.1)
+# ~ and replace it with 0.0.0.0, in order to allow other devices connect to memcached.
+# ~ e.g Database queries are saved on cached memory, for instant response on reuse.
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/sysconfig/memcached
 
 # Restart service
 sudo systemctl restart memcached
+
+# Define tcp and udp ports on the firewall
+firewall-cmd --add-port=11211/tcp
+firewall-cmd --runtime-to-permanent
+firewall-cmd --add-port=11111/udp
+firewall-cmd --runtime-to-permanent
+sudo memcached -p 11211 -U 11111 -u memcached -d
