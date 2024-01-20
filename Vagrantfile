@@ -88,7 +88,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # RabbitMQ provisioning bash script is rabbitmq.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
-        rmq0101.vm.provision "shell", path: "/provisioning/rabbitmq.sh"
+        rmq01.vm.provision "shell", path: "/provisioning/rabbitmq.sh"
 
     end
 
