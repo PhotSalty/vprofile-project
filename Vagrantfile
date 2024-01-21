@@ -35,7 +35,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
         
         # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. Use a distinct set of x and y,
         # in order to avoid IP conflicts (2 or more devices in the same network with the same IP address).
-        db01.vm.network "private_network", ip: "192.168.50.10"  
+        db01.vm.network "private_network", ip: "192.168.56.10"  
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
         db01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # MySQL provisioning bash script is mysql.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
-        db01.vm.provision "shell", path: "/provisioning/mysql.sh"
+        db01.vm.provision "shell", path: "provisioning/mysql.sh"
 
     end
 
@@ -56,8 +56,8 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
         # Occupied IPs:
-        #   (db01) -> 192.168.50.10
-        mc01.vm.network "private_network", ip: "192.168.50.11"
+        #   (db01) -> 192.168.56.10
+        mc01.vm.network "private_network", ip: "192.168.56.11"
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
         mc01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
@@ -66,7 +66,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Memcache provisioning bash script is memcache.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
-        mc01.vm.provision "shell", path: "/provisioning/memcache.sh"
+        mc01.vm.provision "shell", path: "provisioning/memcache.sh"
 
     end
 
@@ -78,8 +78,8 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
         # Occupied IPs:
-        #   (db01) -> 192.168.50.10 , (mc01) -> 192.168.50.11
-        rmq01.vm.network "private_network", ip: "192.168.50.12"
+        #   (db01) -> 192.168.56.10 , (mc01) -> 192.168.56.11
+        rmq01.vm.network "private_network", ip: "192.168.56.12"
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
         rmq01.vm.provider "virtualbox" do |vb|  # select hypervisor - implement configurations using object vb
@@ -88,7 +88,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # RabbitMQ provisioning bash script is rabbitmq.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
-        rmq01.vm.provision "shell", path: "/provisioning/rabbitmq.sh"
+        rmq01.vm.provision "shell", path: "provisioning/rabbitmq.sh"
 
     end
 
@@ -100,9 +100,9 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
         # Occupied IPs:
-        #   (db01) -> 192.168.50.10 , (mc01) -> 192.168.50.11 ,
-        #   (rmq01) -> 192.168.50.12
-        app01.vm.network "private_network", ip: "192.168.50.13"
+        #   (db01) -> 192.168.56.10 , (mc01) -> 192.168.56.11 ,
+        #   (rmq01) -> 192.168.56.12
+        app01.vm.network "private_network", ip: "192.168.56.13"
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
         app01.vm.provider "virtualbox" do |vb|   # select hypervisor - implement configurations using object vb
@@ -111,7 +111,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Tomcat provisioning bash script is tomcat.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
-        app01.vm.provision "shell", path: "/provisioning/tomcat.sh"
+        app01.vm.provision "shell", path: "provisioning/tomcat.sh"
 
     end
    
@@ -124,8 +124,8 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
 
         # Set a private static IP 192.168.y.x , where y,x @ [0, 255]. 
         # Occupied IPs:
-        #    (db01) -> 192.168.50.10 ,  (mc01) -> 192.168.50.11 ,
-        #   (rmq01) -> 192.168.50.12 , (app01) -> 192.168.50.13
+        #    (db01) -> 192.168.56.10 ,  (mc01) -> 192.168.56.11 ,
+        #   (rmq01) -> 192.168.56.12 , (app01) -> 192.168.56.13
         web01.vm.network "private_network", ip: "192.168.56.14"
 
         # Oracle VirtualBOx (chosen hypervisor) configurations
@@ -136,7 +136,7 @@ Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configu
         
         # Nginx provisioning bash script is nginx.sh, placed in "provisioning" folder.
         # Type the full file path, starting from current folder.
-        web01.vm.provision "shell", path: "/provisioning/nginx.sh"  
+        web01.vm.provision "shell", path: "provisioning/nginx.sh"  
 
     end
 
