@@ -48,7 +48,7 @@ sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 
 sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'%' identified by 'R4andP4ss'"
 
 # Copy a backup User DB, provided by Imran Teli Udemy courses for DevOps: https://www.udemy.com/course/decodingdevops/
-sudo mysql -u root -p"$DATABASE_PASS" accounts < /tmp/vprofile-project/resources/db_backup_ImTeliDB.sql
+sudo mysql -u root -p"$DATABASE_PASS" accounts < /tmp/vprofile-project/src/main/resources/db_backup.sql
 
 # Refresh and restart mysql service (mariadb-server)
 sudo mysql -u root -p"$DATABASE_PASS" -e "FLUSH PRIVILEGES"
