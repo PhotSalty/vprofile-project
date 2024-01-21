@@ -1,2 +1,5 @@
 # Ignore personal_info directory
 /personal_info/
+
+# Ignore .vagrant directory
+/.vagrant/

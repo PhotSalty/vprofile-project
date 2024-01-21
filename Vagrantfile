@@ -24,7 +24,8 @@ VM setup order:                         |
 Vagrant.configure("2") do |config|      # object config for vagrant 1.1+ configuration
 
 ## Global variables:
-# place them here
+    config.hostmanager.enabled = true 
+    config.hostmanager.manage_host = true
 
 
 ## DB on centos-stream-9 - implement configurations using object db01: 
