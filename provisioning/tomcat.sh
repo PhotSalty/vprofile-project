@@ -43,26 +43,26 @@ After=network.target
 
 [Service]
 
-User=tomcat     # ~ The user we have already created
-Group=tomcat    # ~ alongside with his group
+User=tomcat
+Group=tomcat
 
-WorkingDirectory=/usr/local/tomcat      # The directory we created with rsync
+WorkingDirectory=/usr/local/tomcat
 
-Environment=JAVA_HOME=/usr/lib/jvm/jre  # Specify the location of Java Runtime Environment (JRE) 
+Environment=JAVA_HOME=/usr/lib/jvm/jre
 
-Environment=CATALINA_PID=/var/tomcat/%i/run/tomcat.pid  # Location of the tomcat process id (PID)
-Environment=CATALINA_HOME=/usr/local/tomcat             # Home directory of tomcat
-Environment=CATALINA_BASE=/usr/local/tomcat             # Base directory of running a specific onstance of Tomcat
+Environment=CATALINA_PID=/var/tomcat/%i/run/tomcat.pid
+Environment=CATALINA_HOME=/usr/local/tomcat
+Environment=CATALINA_BASE=/usr/local/tomcat
 
-ExecStart=/usr/local/tomcat/bin/catalina.sh run         # ~ Given scripts for systemctl
-ExecStop=/usr/local/tomcat/bin/shutdown.sh              # ~ start and stop tomcat service
+ExecStart=/usr/local/tomcat/bin/catalina.sh run
+ExecStop=/usr/local/tomcat/bin/shutdown.sh
 
 
-RestartSec=10       # ~ Setting sleeptime of restarting to 10 seconds and handle any
-Restart=always      # ~ unexpected exit with 'restart' (always)
+RestartSec=10
+Restart=always
 
 [Install]
-WantedBy=multi-user.target      # Start the service when the system reaches the multi-user mode
+WantedBy=multi-user.target
 
 EOT
 
