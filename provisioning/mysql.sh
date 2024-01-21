@@ -44,8 +44,8 @@ sudo mysql -u root -p"$DATABASE_PASS" -e "create database accounts" # CAPS-ONLY 
 
 # ~ Grant privileges on user "admin" for the "accounts" database when he connects from
 # ~ localhost or any other location/machine (symbol % for every other location)
-sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'localhost' identified by 'R4andP4ss'"
-sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'%' identified by 'R4andP4ss'"
+sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'localhost' identified by 'R4ndP4ss'"
+sudo mysql -u root -p"$DATABASE_PASS" -e "grant all privileges on accounts.* TO 'admin'@'%' identified by 'R4ndP4ss'"
 
 # Copy a backup User DB, provided by Imran Teli Udemy courses for DevOps: https://www.udemy.com/course/decodingdevops/
 sudo mysql -u root -p"$DATABASE_PASS" accounts < /tmp/vprofile-project/src/main/resources/db_backup.sql
