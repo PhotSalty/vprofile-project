@@ -1,7 +1,7 @@
 <hr>
 <center>
 
-**<span style="font-size: 40px;"> Vprofile App (Local)</span><br><span style="font-size: 25px;">Automated setup - Vagrant Multi Tier VM Stack</span>**
+# <span style="font-size: 40px;"> Vprofile App (Local)</span><br><span style="font-size: 25px;">Automated setup - Vagrant Multi Tier VM Stack</span>
 
 </center>
 <hr>
