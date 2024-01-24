@@ -10,7 +10,7 @@ description
 
 
 # Setting variable for database password of your choice
-DATABAS_PASS='R4ndP4ss'
+DATABASE_PASS='R4ndP4ss'
 
 # Install basic and extra packages, git, (un)zip-handlers and maria-db server
 sudo yum update -y
