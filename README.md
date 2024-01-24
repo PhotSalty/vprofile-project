@@ -5,7 +5,7 @@ _____________
 ### Services:
 
 - **Nginx**
-  - *Reverse proxy, forwarding client requests to Apache Tomcat (Java application server) and returning the responses.*
+  1. *Reverse proxy, forwarding client requests to Apache Tomcat (Java app server) and returning the responses.*
 
 - **Apache Tomcat**:
   - *Web application server that provides a platform for deploying Java-based web applications.*
